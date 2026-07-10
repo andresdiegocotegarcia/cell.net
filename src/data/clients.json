@@ -1,0 +1,5 @@
+[
+  {"id": 1, "nombre": "Juan Pérez", "cedula": "1098765432", "telefono": "3001234567", "email": "juan@email.com"},
+  {"id": 2, "nombre": "María López", "cedula": "1087654321", "telefono": "3109876543", "email": "maria@email.com"},
+  {"id": 3, "nombre": "Carlos García", "cedula": "1076543210", "telefono": "3205551234", "email": "carlos@email.com"}
+]

@@ -1,0 +1,150 @@
+/* ============================================
+   About Page Styles
+   Página de información del proyecto
+   ============================================ */
+
+.about-page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.about-title {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  color: var(--color-text);
+}
+
+.about-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.about-section-title {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-primary);
+}
+
+.about-description {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+}
+
+.about-description:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Tecnologías --- */
+.about-tech-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.about-tech-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-md);
+  transition: transform var(--transition-fast);
+}
+
+.about-tech-item:hover {
+  transform: translateX(4px);
+}
+
+.about-tech-icon {
+  font-size: var(--font-size-2xl);
+  flex-shrink: 0;
+}
+
+.about-tech-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.about-tech-name {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.about-tech-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+/* --- Equipo --- */
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.about-team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-lg);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-md);
+}
+
+.about-team-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.about-team-name {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.about-team-role {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin-bottom: 0;
+}
+
+/* --- Responsive: Tablet --- */
+@media (min-width: 768px) {
+  .about-page {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+
+  .about-tech-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Responsive: Desktop --- */
+@media (min-width: 1024px) {
+  .about-page {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .about-tech-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

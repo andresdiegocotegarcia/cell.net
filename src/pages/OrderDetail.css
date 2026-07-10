@@ -1,0 +1,229 @@
+/* ============================================
+   OrderDetail - Página de Detalle de Orden
+   ============================================ */
+
+.order-detail-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.order-detail-page h1 {
+  margin-bottom: var(--spacing-xl);
+  color: var(--color-text);
+}
+
+/* --- Header con título y botón volver --- */
+.order-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.order-detail-header h1 {
+  margin-bottom: 0;
+}
+
+/* --- Sección de Estado --- */
+.order-status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.order-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.order-status-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.order-status-info .form-section-title {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* --- Mensaje de error de transición --- */
+.order-error-message {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  margin-top: var(--spacing-sm);
+}
+
+/* --- Grids de información (read-only) --- */
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.order-info-grid--full .order-info-item {
+  grid-column: 1 / -1;
+}
+
+.order-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.order-info-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  font-weight: 500;
+}
+
+.order-info-value {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+/* --- Orden no encontrada --- */
+.order-not-found {
+  text-align: center;
+  padding: var(--spacing-2xl);
+}
+
+.order-not-found h1 {
+  color: var(--color-danger);
+  margin-bottom: var(--spacing-md);
+}
+
+.order-not-found p {
+  color: var(--color-text-light);
+  margin-bottom: var(--spacing-xl);
+}
+
+/* --- Fecha de entrega --- */
+.order-delivery-date {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* --- Reutilización de estilos del formulario (form-section, form-row, form-actions) --- */
+.order-detail-page .form-section {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-xl);
+}
+
+.order-detail-page .form-section-title {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-primary-light);
+}
+
+.order-detail-page .form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.order-detail-page .form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-start;
+  padding-top: var(--spacing-md);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+/* Desktop: 2 columnas para campos técnicos */
+@media (min-width: 1024px) {
+  .order-detail-page .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .order-detail-page .form-section {
+    padding: var(--spacing-xl);
+  }
+
+  .order-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .order-detail-page .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .order-detail-page .form-section {
+    padding: var(--spacing-lg);
+  }
+
+  .order-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Móvil */
+@media (max-width: 767px) {
+  .order-detail-page {
+    padding: 0;
+  }
+
+  .order-detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-detail-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .order-detail-page .form-section {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+  }
+
+  .order-detail-page .form-section-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .order-detail-page .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .order-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-status-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-detail-page .form-actions {
+    flex-direction: column;
+  }
+
+  .order-detail-page .form-actions .btn {
+    width: 100%;
+  }
+}

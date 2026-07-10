@@ -1,0 +1,38 @@
+/* ============================================
+   StatusBadge Component Styles
+   ============================================ */
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* En Espera - Amarillo */
+.status-badge-en_espera {
+  background-color: #FFC107;
+  color: #856404;
+}
+
+/* En Reparación - Azul */
+.status-badge-en_reparacion {
+  background-color: #17A2B8;
+  color: #fff;
+}
+
+/* Listo - Verde */
+.status-badge-listo {
+  background-color: #28A745;
+  color: #fff;
+}
+
+/* Entregado - Gris */
+.status-badge-entregado {
+  background-color: #6C757D;
+  color: #fff;
+}

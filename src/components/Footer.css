@@ -1,0 +1,28 @@
+/* ============================================
+   Footer Component Styles
+   ============================================ */
+
+.footer {
+  background-color: var(--color-text);
+  color: var(--color-white);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-credits {
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  margin-bottom: 0;
+}

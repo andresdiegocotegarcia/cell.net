@@ -1,0 +1,88 @@
+/* ============================================
+   CeluFix - App Layout
+   Estructura general: Header, Main, Footer
+   ============================================ */
+
+/* --- Layout principal con Flexbox --- */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Top accent line --- */
+.app::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #1a56db, #3b82f6, #60a5fa);
+  position: sticky;
+  top: 0;
+  z-index: 101;
+}
+
+/* --- Header / Navbar --- */
+.app-header {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* --- Contenido principal --- */
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* --- Footer --- */
+.app-footer {
+  background-color: var(--color-text);
+  color: var(--color-white);
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin-top: auto;
+}
+
+.app-footer p {
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* --- Contenedor genérico --- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* --- Media Queries --- */
+
+/* Tablet: 768px a 1023px */
+@media (min-width: 768px) {
+  .app-main {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  .app-footer {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+/* Desktop: 1024px en adelante */
+@media (min-width: 1024px) {
+  .app-main {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .app-footer {
+    padding: var(--spacing-xl) var(--spacing-xl);
+  }
+}

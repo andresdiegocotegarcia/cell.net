@@ -1,0 +1,94 @@
+/* ============================================
+   Clients Page Styles
+   ============================================ */
+
+.clients-page {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.clients-page h1 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.clients-search-container {
+  margin-bottom: 1.5rem;
+}
+
+.clients-search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.clients-search:focus {
+  border-color: #007bff;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.client-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.client-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 0.25rem 0;
+}
+
+.client-detail {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.client-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.clients-empty {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  padding: 2rem 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
+}
+
+/* Tablet: 768px - 1023px */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+  .clients-page {
+    padding: 1rem;
+  }
+
+  .clients-search {
+    min-height: 44px;
+  }
+
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+}

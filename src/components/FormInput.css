@@ -1,0 +1,69 @@
+/* ============================================
+   FormInput - Componente de campo de formulario
+   ============================================ */
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+/* --- Label --- */
+.form-input-label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* --- Indicador de obligatorio --- */
+.form-input-required {
+  color: var(--color-danger);
+  margin-left: var(--spacing-xs);
+  font-weight: 700;
+}
+
+/* --- Input --- */
+.form-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  min-height: var(--touch-target);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+  outline: none;
+}
+
+.form-input:disabled {
+  background-color: var(--color-secondary-light);
+  color: var(--color-text-light);
+  cursor: not-allowed;
+}
+
+/* --- Estado de error --- */
+.form-input--error {
+  border-color: var(--color-danger);
+}
+
+.form-input--error:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-light);
+}
+
+/* --- Mensaje de error --- */
+.form-input-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  margin-top: var(--spacing-xs);
+}

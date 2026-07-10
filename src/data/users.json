@@ -1,0 +1,4 @@
+[
+  {"id": 1, "nombre": "Admin CeluFix", "email": "admin@celufix.com", "password": "admin123", "rol": "administrador"},
+  {"id": 2, "nombre": "Pedro Técnico", "email": "pedro@celufix.com", "password": "tecnico123", "rol": "tecnico"}
+]
