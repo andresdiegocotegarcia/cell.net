@@ -1,0 +1,99 @@
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.animated-bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+  filter: blur(40px);
+  animation: float-shape 20s ease-in-out infinite;
+}
+
+.shape-1 {
+  width: 300px;
+  height: 300px;
+  background: #00d4ff;
+  top: -100px;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 25s;
+}
+
+.shape-2 {
+  width: 200px;
+  height: 200px;
+  background: #7dd3fc;
+  top: 30%;
+  right: -50px;
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+
+.shape-3 {
+  width: 150px;
+  height: 150px;
+  background: #00d4ff;
+  bottom: 20%;
+  left: 5%;
+  animation-delay: -10s;
+  animation-duration: 22s;
+}
+
+.shape-4 {
+  width: 250px;
+  height: 250px;
+  background: #164e63;
+  top: 60%;
+  right: 20%;
+  animation-delay: -7s;
+  animation-duration: 28s;
+}
+
+@keyframes float-shape {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(15px, 35px) scale(1.05);
+  }
+}
+
+/* Floating tech icons */
+.floating-icon {
+  position: absolute;
+  pointer-events: none;
+  animation: float-icon linear infinite;
+  will-change: transform;
+}
+
+@keyframes float-icon {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(20px, -30px) rotate(15deg);
+  }
+  50% {
+    transform: translate(-15px, -60px) rotate(-10deg);
+  }
+  75% {
+    transform: translate(25px, -20px) rotate(20deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}

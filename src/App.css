@@ -1,5 +1,5 @@
 /* ============================================
-   CeluFix - App Layout
+   BEROT TECNOLOGY - App Layout
    Estructura general: Header, Main, Footer
    ============================================ */
 
@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 /* --- Top accent line --- */
@@ -15,7 +16,7 @@
   content: '';
   display: block;
   height: 3px;
-  background: linear-gradient(90deg, #1a56db, #3b82f6, #60a5fa);
+  background: linear-gradient(90deg, #00d4ff, #7dd3fc, #00d4ff);
   position: sticky;
   top: 0;
   z-index: 101;
@@ -23,9 +24,11 @@
 
 /* --- Header / Navbar --- */
 .app-header {
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  background: rgba(13, 26, 47, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 212, 255, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -35,22 +38,28 @@
 .app-main {
   flex: 1;
   width: 100%;
-  max-width: var(--max-width);
+  max-width: 1400px;
   margin: 0 auto;
-  padding: var(--spacing-lg) var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  position: relative;
+  z-index: 1;
 }
 
 /* --- Footer --- */
 .app-footer {
-  background-color: var(--color-text);
-  color: var(--color-white);
+  background: rgba(10, 22, 40, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  color: #7dd3fc;
   text-align: center;
-  padding: var(--spacing-lg) var(--spacing-md);
-  margin-top: auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
 .app-footer p {
-  color: var(--color-white);
+  color: #7dd3fc;
   font-size: var(--font-size-sm);
   margin-bottom: var(--spacing-xs);
 }

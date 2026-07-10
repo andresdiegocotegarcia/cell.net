@@ -3,9 +3,11 @@
    ============================================ */
 
 .navbar {
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  background: rgba(13, 26, 47, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -22,22 +24,32 @@
 
 /* Brand / Logo */
 .navbar-brand {
-  font-size: calc(var(--font-size-xl) + 0.125rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-lg);
   font-weight: 700;
-  color: var(--color-primary);
+  color: #00d4ff;
   text-decoration: none;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
+}
+
+.navbar-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .navbar-brand:hover {
-  color: var(--color-primary-hover);
+  color: #7dd3fc;
 }
 
 /* Hamburger button */
 .navbar-toggle {
   display: none;
   font-size: var(--font-size-2xl);
-  color: var(--color-text);
+  color: #e2e8f0;
   min-height: var(--touch-target);
   min-width: var(--touch-target);
   align-items: center;
@@ -46,7 +58,7 @@
 }
 
 .navbar-toggle:hover {
-  background-color: var(--color-secondary-light);
+  background-color: rgba(0, 100, 150, 0.5);
 }
 
 /* Navigation links */
@@ -62,28 +74,28 @@
   padding: var(--spacing-sm) var(--spacing-md);
   font-size: var(--font-size-base);
   font-weight: 500;
-  color: var(--color-text);
+  color: #e2e8f0;
   border-radius: var(--border-radius-sm);
   transition: color var(--transition-fast), background-color var(--transition-fast);
   text-decoration: none;
 }
 
 .navbar-link:hover {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  color: #7dd3fc;
+  background-color: rgba(0, 100, 150, 0.5);
 }
 
 /* Active link styling (NavLink adds .active class) */
 .navbar-link.active {
-  color: var(--color-primary);
+  color: #00d4ff;
   font-weight: 600;
-  background-color: var(--color-primary-light);
+  background-color: rgba(0, 100, 150, 0.5);
   border-bottom: none;
 }
 
 /* Logout button */
 .navbar-logout {
-  color: var(--color-danger);
+  color: #f43f5e;
   cursor: pointer;
   background: none;
   border: none;
@@ -91,14 +103,14 @@
 }
 
 .navbar-logout:hover {
-  color: var(--color-danger-hover);
-  background-color: var(--color-danger-light);
+  color: #fb7185;
+  background-color: rgba(244, 63, 94, 0.15);
 }
 
 /* User greeting */
 .navbar-user-name {
   font-size: var(--font-size-sm);
-  color: var(--color-text-light);
+  color: #7dd3fc;
   font-weight: 500;
   padding: var(--spacing-sm) var(--spacing-md);
 }
@@ -110,6 +122,11 @@
 @media (max-width: 767px) {
   .navbar-toggle {
     display: flex;
+    color: #e2e8f0;
+  }
+
+  .navbar-toggle:hover {
+    background-color: rgba(0, 100, 150, 0.5);
   }
 
   .navbar-links {
@@ -120,9 +137,11 @@
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-border);
-    box-shadow: var(--shadow-md);
+    background: rgba(13, 26, 47, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
     padding: var(--spacing-md);
     gap: 0;
     transition: opacity var(--transition-base), transform var(--transition-base);
@@ -151,13 +170,13 @@
   }
 
   .navbar-link.active {
-    background-color: var(--color-primary-light);
+    background-color: rgba(0, 100, 150, 0.5);
     border-bottom: none;
   }
 
   .navbar-user-name {
     padding: var(--spacing-md);
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid rgba(0, 212, 255, 0.2);
     margin-top: var(--spacing-sm);
   }
 

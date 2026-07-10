@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import AnimatedBackground from './components/AnimatedBackground';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -166,8 +167,50 @@ function AppContent() {
     }
   };
 
+  const deleteOrder = async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/ordenes/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Error eliminando orden');
+      setOrders((prev) => prev.filter((order) => order.id !== id));
+      return true;
+    } catch (err) {
+      console.error('Error eliminando orden:', err);
+      return false;
+    }
+  };
+
+  const deleteClient = async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/clientes/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Error eliminando cliente');
+      setClients((prev) => prev.filter((client) => client.id !== id));
+      return true;
+    } catch (err) {
+      console.error('Error eliminando cliente:', err);
+      return false;
+    }
+  };
+
+  const updateClient = async (id, clientData) => {
+    try {
+      const res = await fetch(`${API_URL}/clientes/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(clientData),
+      });
+      if (!res.ok) throw new Error('Error actualizando cliente');
+      const updated = await res.json();
+      setClients((prev) => prev.map((c) => (c.id === id ? updated : c)));
+      return updated;
+    } catch (err) {
+      console.error('Error actualizando cliente:', err);
+      return null;
+    }
+  };
+
   return (
     <div className="app">
+      <AnimatedBackground />
       <Navbar
         isAuthenticated={isAuthenticated}
         userName={currentUser ? currentUser.nombre : ''}
@@ -202,7 +245,7 @@ function AppContent() {
             path="/dashboard"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Dashboard orders={orders} clients={clients} loading={loading} />
+                <Dashboard orders={orders} clients={clients} loading={loading} onDeleteOrder={deleteOrder} />
               </ProtectedRoute>
             }
           />
@@ -223,7 +266,7 @@ function AppContent() {
             path="/orden/:id"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <OrderDetail orders={orders} onUpdateOrder={updateOrder} />
+                <OrderDetail orders={orders} onUpdateOrder={updateOrder} onDeleteOrder={deleteOrder} />
               </ProtectedRoute>
             }
           />
@@ -231,7 +274,7 @@ function AppContent() {
             path="/clientes"
             element={
               <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <Clients clients={clients} loading={loading} />
+                <Clients clients={clients} loading={loading} onDeleteClient={deleteClient} onUpdateClient={updateClient} />
               </ProtectedRoute>
             }
           />

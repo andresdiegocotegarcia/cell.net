@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
+import PhotoUpload from '../components/PhotoUpload';
 import './NewOrder.css';
 
 function NewOrder({ clients, orders, onAddOrder, onAddClient }) {
@@ -21,6 +22,7 @@ function NewOrder({ clients, orders, onAddOrder, onAddClient }) {
     accesorios: '',
     motivo_reparacion: '',
     contrasena_equipo: '',
+    fotos_recepcion: [],
   });
   const [errors, setErrors] = useState({});
 
@@ -140,6 +142,7 @@ function NewOrder({ clients, orders, onAddOrder, onAddClient }) {
       accesorios: formData.accesorios.trim(),
       motivo_reparacion: formData.motivo_reparacion.trim(),
       contrasena_equipo: formData.contrasena_equipo.trim(),
+      fotos_recepcion: formData.fotos_recepcion,
     };
 
     await onAddOrder(orderData);
@@ -340,6 +343,17 @@ function NewOrder({ clients, orders, onAddOrder, onAddClient }) {
               onChange={handleChange}
             />
           </div>
+        </section>
+
+        {/* Sección 4: Fotos del Equipo */}
+        <section className="form-section">
+          <h2 className="form-section-title">Fotos del Equipo (Recepción)</h2>
+          <PhotoUpload
+            photos={formData.fotos_recepcion}
+            onPhotosChange={(photos) => setFormData((prev) => ({ ...prev, fotos_recepcion: photos }))}
+            maxPhotos={3}
+            label="Fotos de condiciones de ingreso"
+          />
         </section>
 
         <div className="form-actions">

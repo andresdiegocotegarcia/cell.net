@@ -1,0 +1,82 @@
+.photo-upload {
+  margin-bottom: 1rem;
+}
+
+.photo-upload-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.photo-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.photo-upload-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #164e63;
+}
+
+.photo-upload-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-upload-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f43f5e;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.photo-upload-add {
+  aspect-ratio: 1;
+  border: 2px dashed #164e63;
+  border-radius: 8px;
+  background: #0f1932;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: border-color 0.2s;
+}
+
+.photo-upload-add:hover {
+  border-color: #00d4ff;
+}
+
+.photo-upload-add-icon {
+  font-size: 1.5rem;
+}
+
+.photo-upload-add-text {
+  font-size: 0.75rem;
+  color: #7dd3fc;
+}
+
+@media (max-width: 767px) {
+  .photo-upload-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+}

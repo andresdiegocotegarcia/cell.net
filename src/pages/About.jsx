@@ -17,13 +17,13 @@ function About() {
 
   return (
     <div className="page about-page">
-      <h1 className="about-title">Acerca de CeluFix</h1>
+      <h1 className="about-title">Acerca de BEROT TECNOLOGY</h1>
 
       <section className="about-section">
         <Card>
           <h2 className="about-section-title">Sobre el Proyecto</h2>
           <p className="about-description">
-            CeluFix es un sistema web de gestión para un taller de reparación de celulares.
+            BEROT TECNOLOGY es un sistema web de gestión para un taller de reparación de celulares y computadores.
             Fue desarrollado como parte del Diplomado Full Stack, representando la primera fase
             del proyecto enfocada en el frontend con datos locales.
           </p>

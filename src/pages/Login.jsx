@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
-import Card from '../components/Card';
+import frases from '../data/frases.js';
+import logo from '../assets/logo.jpg';
 import './Login.css';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function Login({ onLogin }) {
   const navigate = useNavigate();
+  const [frase] = useState(() => frases[Math.floor(Math.random() * frases.length)]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -66,48 +68,50 @@ function Login({ onLogin }) {
 
   return (
     <div className="login-page">
-      <Card>
-        <div className="login-container">
-          <div className="login-brand">📱 CeluFix</div>
-          <h1 className="login-title">Iniciar Sesión</h1>
-
-          {errors.general && (
-            <div className="login-error-general" role="alert">
-              {errors.general}
-            </div>
-          )}
-
-          <form className="login-form" onSubmit={handleSubmit} noValidate>
-            <FormInput
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              placeholder="correo@ejemplo.com"
-              error={errors.email}
-              onChange={handleChange}
-              required
-            />
-
-            <FormInput
-              label="Contraseña"
-              type="password"
-              name="password"
-              value={formData.password}
-              placeholder="Ingresa tu contraseña"
-              error={errors.password}
-              onChange={handleChange}
-              required
-            />
-
-            <Button text="Iniciar Sesión" type="submit" variant="primary" />
-          </form>
-
-          <p className="login-register-link">
-            ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
-          </p>
+      <div className="login-container">
+        <div className="login-brand">
+          <img src={logo} alt="BEROT TECNOLOGY" className="login-logo" />
+          <span>BEROT TECNOLOGY</span>
         </div>
-      </Card>
+        <p className="login-frase">{frase}</p>
+        <h1 className="login-title">Iniciar Sesión</h1>
+
+        {errors.general && (
+          <div className="login-error-general" role="alert">
+            {errors.general}
+          </div>
+        )}
+
+        <form className="login-form" onSubmit={handleSubmit} noValidate>
+          <FormInput
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="correo@ejemplo.com"
+            error={errors.email}
+            onChange={handleChange}
+            required
+          />
+
+          <FormInput
+            label="Contraseña"
+            type="password"
+            name="password"
+            value={formData.password}
+            placeholder="Ingresa tu contraseña"
+            error={errors.password}
+            onChange={handleChange}
+            required
+          />
+
+          <Button text="Iniciar Sesión" type="submit" variant="primary" />
+        </form>
+
+        <p className="login-register-link">
+          ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+        </p>
+      </div>
     </div>
   );
 }

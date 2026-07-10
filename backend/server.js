@@ -7,7 +7,7 @@ const PORT = 4000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 // ============================================
 // RUTAS DE AUTENTICACIÓN
@@ -146,7 +146,7 @@ app.post('/api/ordenes', async (req, res) => {
   try {
     const {
       cliente_id, cliente_nombre, marca, modelo, color, imei,
-      condiciones_ingreso, accesorios, motivo_reparacion, contrasena_equipo
+      condiciones_ingreso, accesorios, motivo_reparacion, contrasena_equipo, fotos_recepcion
     } = req.body;
 
     if (!cliente_nombre || !marca || !modelo || !condiciones_ingreso || !motivo_reparacion) {
@@ -159,10 +159,10 @@ app.post('/api/ordenes', async (req, res) => {
     const numero_orden = `ORD-${String(nextNum).padStart(3, '0')}`;
 
     const result = await pool.query(
-      `INSERT INTO ordenes (numero_orden, cliente_id, cliente_nombre, marca, modelo, color, imei, condiciones_ingreso, accesorios, motivo_reparacion, contrasena_equipo, fecha_recepcion, estado)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, CURRENT_DATE, 'en_espera')
+      `INSERT INTO ordenes (numero_orden, cliente_id, cliente_nombre, marca, modelo, color, imei, condiciones_ingreso, accesorios, motivo_reparacion, contrasena_equipo, fotos_recepcion, fecha_recepcion, estado)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, CURRENT_DATE, 'en_espera')
        RETURNING *`,
-      [numero_orden, cliente_id || null, cliente_nombre, marca, modelo, color || null, imei || null, condiciones_ingreso, accesorios || null, motivo_reparacion, contrasena_equipo || null]
+      [numero_orden, cliente_id || null, cliente_nombre, marca, modelo, color || null, imei || null, condiciones_ingreso, accesorios || null, motivo_reparacion, contrasena_equipo || null, fotos_recepcion || []]
     );
 
     res.status(201).json(result.rows[0]);
@@ -189,7 +189,7 @@ app.put('/api/ordenes/:id', async (req, res) => {
     const values = [];
     let paramIndex = 1;
 
-    const allowedFields = ['estado', 'diagnostico', 'repuestos', 'procedimiento', 'costo', 'fecha_entrega', 'condiciones_entrega'];
+    const allowedFields = ['estado', 'diagnostico', 'repuestos', 'procedimiento', 'costo', 'fecha_entrega', 'condiciones_entrega', 'fotos_recepcion', 'fotos_entrega', 'marca', 'modelo', 'color', 'imei', 'condiciones_ingreso', 'accesorios', 'motivo_reparacion', 'contrasena_equipo', 'cliente_nombre'];
 
     for (const field of allowedFields) {
       if (updates[field] !== undefined) {
@@ -213,6 +213,55 @@ app.put('/api/ordenes/:id', async (req, res) => {
     res.json(result.rows[0]);
   } catch (err) {
     console.error('Error actualizando orden:', err);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// PUT /api/clientes/:id
+app.put('/api/clientes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre, cedula, telefono, email } = req.body;
+    const result = await pool.query(
+      'UPDATE clientes SET nombre = $1, cedula = $2, telefono = $3, email = $4 WHERE id = $5 RETURNING *',
+      [nombre, cedula, telefono, email || null, id]
+    );
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error actualizando cliente:', err);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// DELETE /api/clientes/:id
+app.delete('/api/clientes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('DELETE FROM clientes WHERE id = $1 RETURNING id', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+    res.json({ success: true, message: 'Cliente eliminado' });
+  } catch (err) {
+    console.error('Error eliminando cliente:', err);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// DELETE /api/ordenes/:id
+app.delete('/api/ordenes/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('DELETE FROM ordenes WHERE id = $1 RETURNING id', [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Orden no encontrada' });
+    }
+    res.json({ success: true, message: 'Orden eliminada' });
+  } catch (err) {
+    console.error('Error eliminando orden:', err);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 });

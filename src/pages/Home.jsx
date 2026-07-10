@@ -1,7 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import frases from '../data/frases.js';
+import logo from '../assets/logo.jpg';
 import './Home.css';
 
 function Home() {
+  const [frase, setFrase] = useState('');
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * frases.length);
+    setFrase(frases[randomIndex]);
+  }, []);
+
   const servicios = [
     {
       icono: '📱',
@@ -29,12 +39,11 @@ function Home() {
     <div className="page home-page">
       {/* Hero Section */}
       <section className="home-hero home-hero-dark">
-        <h1 className="home-hero-title">Bienvenido a CeluFix</h1>
-        <p className="home-hero-subtitle">Sistema de Gestión de Reparación de Celulares</p>
+        <img src={logo} alt="BEROT TECNOLOGY" className="home-hero-logo" />
+        <h1 className="home-hero-title">Bienvenido a BEROT TECNOLOGY</h1>
+        <p className="home-hero-subtitle">Sistema de Gestión de Reparación de Celulares y Computadores</p>
         <p className="home-hero-description">
-          Somos un taller especializado en la reparación de dispositivos móviles.
-          Ofrecemos diagnósticos precisos, reparaciones de calidad y un seguimiento
-          transparente del estado de tu equipo.
+          {frase}
         </p>
         <Link to="/login" className="home-cta-button">
           Iniciar Sesión

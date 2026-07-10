@@ -6,34 +6,38 @@
 
 .dashboard-page h1 {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #e2e8f0;
 }
 
 .dashboard-filters {
   display: flex;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   flex-wrap: wrap;
-  background-color: var(--color-white);
+  background: rgba(15, 25, 50, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1rem;
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  border-radius: 16px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
 }
 
 .dashboard-search {
   flex: 1;
   min-width: 200px;
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  color: #e2e8f0;
+  background: rgba(10, 22, 40, 0.6);
+  border: 1px solid rgba(0, 100, 150, 0.5);
+  border-radius: 12px;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .dashboard-search:focus {
-  border-color: var(--color-primary);
+  border-color: #00d4ff;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
 }
 
 .dashboard-order-count {
@@ -45,18 +49,20 @@
 
 .dashboard-status-filter {
   padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  color: #e2e8f0;
+  background: rgba(10, 22, 40, 0.6);
+  border: 1px solid rgba(0, 100, 150, 0.5);
+  border-radius: 12px;
   font-size: 1rem;
-  background-color: #fff;
   cursor: pointer;
   min-width: 160px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .dashboard-status-filter:focus {
-  border-color: var(--color-primary);
+  border-color: #00d4ff;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
 }
 
 .dashboard-grid {
@@ -67,12 +73,14 @@
 
 .dashboard-empty {
   text-align: center;
-  color: #666;
+  color: #7dd3fc;
   font-size: 1.1rem;
   padding: 2rem 1rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  border: 1px dashed #ccc;
+  background: rgba(15, 25, 50, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px dashed rgba(0, 212, 255, 0.3);
 }
 
 /* Tablet: 768px - 1023px */
@@ -104,4 +112,9 @@
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Order card wrapper */
+.order-card-wrapper {
+  position: relative;
 }

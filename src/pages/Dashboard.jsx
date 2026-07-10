@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import OrderCard from '../components/OrderCard';
 import './Dashboard.css';
 
-function Dashboard({ orders, clients }) {
+function Dashboard({ orders, clients, loading, onDeleteOrder }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('todos');
   const navigate = useNavigate();
@@ -64,16 +64,17 @@ function Dashboard({ orders, clients }) {
       ) : (
         <div className="dashboard-grid">
           {filteredOrders.map((order) => (
-            <OrderCard
-              key={order.id}
-              numero={order.numero_orden}
-              cliente={order.cliente_nombre}
-              marca={order.marca}
-              modelo={order.modelo}
-              estado={order.estado}
-              fecha={order.fecha_recepcion}
-              onClick={() => navigate(`/orden/${order.id}`)}
-            />
+            <div className="order-card-wrapper" key={order.id}>
+              <OrderCard
+                numero={order.numero_orden}
+                cliente={order.cliente_nombre}
+                marca={order.marca}
+                modelo={order.modelo}
+                estado={order.estado}
+                fecha={order.fecha_recepcion}
+                onClick={() => navigate(`/orden/${order.id}`)}
+              />
+            </div>
           ))}
         </div>
       )}

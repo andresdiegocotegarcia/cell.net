@@ -3,8 +3,8 @@
    ============================================ */
 
 .footer {
-  background-color: var(--color-text);
-  color: var(--color-white);
+  background-color: #070e1a;
+  border-top: 1px solid #164e63;
   padding: var(--spacing-xl) var(--spacing-lg);
   margin-top: auto;
 }
@@ -17,12 +17,12 @@
 
 .footer-text {
   font-size: var(--font-size-base);
-  color: var(--color-white);
+  color: #7dd3fc;
   margin-bottom: var(--spacing-xs);
 }
 
 .footer-credits {
   font-size: var(--font-size-sm);
-  color: var(--color-secondary);
+  color: #64748b;
   margin-bottom: 0;
 }

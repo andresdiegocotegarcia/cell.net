@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
-import Card from '../components/Card';
+import logo from '../assets/logo.jpg';
 import './Register.css';
 
 function Register({ onRegister }) {
@@ -87,58 +87,59 @@ function Register({ onRegister }) {
 
   return (
     <div className="register-page">
-      <Card>
-        <div className="register-container">
-          <div className="register-brand">📱 CeluFix</div>
-          <h1 className="register-title">Crear Cuenta</h1>
-          <form className="register-form" onSubmit={handleSubmit} noValidate>
-            <FormInput
-              label="Nombre"
-              type="text"
-              name="nombre"
-              value={formData.nombre}
-              placeholder="Ingresa tu nombre"
-              error={errors.nombre}
-              onChange={handleChange}
-              required
-            />
-            <FormInput
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              placeholder="Ingresa tu email"
-              error={errors.email}
-              onChange={handleChange}
-              required
-            />
-            <FormInput
-              label="Contraseña"
-              type="password"
-              name="password"
-              value={formData.password}
-              placeholder="Mínimo 6 caracteres"
-              error={errors.password}
-              onChange={handleChange}
-              required
-            />
-            <FormInput
-              label="Confirmar Contraseña"
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              placeholder="Repite la contraseña"
-              error={errors.confirmPassword}
-              onChange={handleChange}
-              required
-            />
-            <Button text="Registrarse" type="submit" variant="primary" />
-          </form>
-          <p className="register-link">
-            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
-          </p>
+      <div className="register-container">
+        <div className="register-brand">
+          <img src={logo} alt="BEROT TECNOLOGY" className="register-logo" />
+          <span>BEROT TECNOLOGY</span>
         </div>
-      </Card>
+        <h1 className="register-title">Crear Cuenta</h1>
+        <form className="register-form" onSubmit={handleSubmit} noValidate>
+          <FormInput
+            label="Nombre"
+            type="text"
+            name="nombre"
+            value={formData.nombre}
+            placeholder="Ingresa tu nombre"
+            error={errors.nombre}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="Ingresa tu email"
+            error={errors.email}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="Contraseña"
+            type="password"
+            name="password"
+            value={formData.password}
+            placeholder="Mínimo 6 caracteres"
+            error={errors.password}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="Confirmar Contraseña"
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            placeholder="Repite la contraseña"
+            error={errors.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+          <Button text="Registrarse" type="submit" variant="primary" />
+        </form>
+        <p className="register-link">
+          ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
+        </p>
+      </div>
     </div>
   );
 }

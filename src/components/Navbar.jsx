@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../assets/logo.jpg';
 import './Navbar.css';
 
 function Navbar({ isAuthenticated, userName, onLogout }) {
@@ -22,7 +23,8 @@ function Navbar({ isAuthenticated, userName, onLogout }) {
     <nav className="navbar">
       <div className="navbar-container">
         <NavLink to="/" className="navbar-brand" onClick={closeMenu}>
-          📱 CeluFix
+          <img src={logo} alt="BEROT TECNOLOGY" className="navbar-logo" />
+          <span>BEROT TECNOLOGY</span>
         </NavLink>
 
         <button
