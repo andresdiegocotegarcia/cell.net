@@ -1,13 +1,73 @@
 import express from 'express';
 import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { fileURLToPath } from 'url';
 import pool from './db.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 const app = express();
 const PORT = 4000;
 
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json({ limit: '200mb' }));
+
+// Serve uploaded photos as static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// ============================================
+// RUTA DE SUBIDA DE IMÁGENES
+// ============================================
+
+// POST /api/upload
+app.post('/api/upload', (req, res) => {
+  try {
+    const { images } = req.body; // array of base64 strings
+
+    if (!images || !Array.isArray(images) || images.length === 0) {
+      return res.status(400).json({ error: 'No se proporcionaron imágenes' });
+    }
+
+    const savedPaths = [];
+
+    for (const base64Image of images) {
+      // Extract the mime type and data
+      const matches = base64Image.match(/^data:image\/(png|jpg|jpeg|gif|webp);base64,(.+)$/);
+      if (!matches) {
+        continue; // skip invalid images
+      }
+
+      const extension = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+      const imageData = matches[2];
+      const buffer = Buffer.from(imageData, 'base64');
+
+      // Generate unique filename
+      const filename = `${crypto.randomUUID()}.${extension}`;
+      const filepath = path.join(uploadsDir, filename);
+
+      // Save file
+      fs.writeFileSync(filepath, buffer);
+
+      // Return the URL path (relative to server)
+      savedPaths.push(`/uploads/${filename}`);
+    }
+
+    res.json({ paths: savedPaths });
+  } catch (err) {
+    console.error('Error subiendo imágenes:', err);
+    res.status(500).json({ error: 'Error al guardar las imágenes' });
+  }
+});
 
 // ============================================
 // RUTAS DE AUTENTICACIÓN
@@ -154,8 +214,8 @@ app.post('/api/ordenes', async (req, res) => {
     }
 
     // Generar número de orden
-    const countResult = await pool.query('SELECT COUNT(*) as total FROM ordenes');
-    const nextNum = parseInt(countResult.rows[0].total) + 1;
+    const countResult = await pool.query('SELECT COALESCE(MAX(id), 0) as max_id FROM ordenes');
+    const nextNum = parseInt(countResult.rows[0].max_id) + 1;
     const numero_orden = `ORD-${String(nextNum).padStart(3, '0')}`;
 
     const result = await pool.query(
@@ -283,6 +343,7 @@ app.listen(PORT, () => {
   console.log(`📋 Endpoints disponibles:`);
   console.log(`   POST /api/auth/login`);
   console.log(`   POST /api/auth/register`);
+  console.log(`   POST /api/upload`);
   console.log(`   GET  /api/clientes`);
   console.log(`   POST /api/clientes`);
   console.log(`   GET  /api/ordenes`);
@@ -290,4 +351,5 @@ app.listen(PORT, () => {
   console.log(`   POST /api/ordenes`);
   console.log(`   PUT  /api/ordenes/:id`);
   console.log(`   GET  /api/health`);
+  console.log(`   GET  /uploads/:filename (static)`);
 });

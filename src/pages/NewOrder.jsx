@@ -142,11 +142,15 @@ function NewOrder({ clients, orders, onAddOrder, onAddClient }) {
       accesorios: formData.accesorios.trim(),
       motivo_reparacion: formData.motivo_reparacion.trim(),
       contrasena_equipo: formData.contrasena_equipo.trim(),
-      fotos_recepcion: formData.fotos_recepcion,
+      fotos_recepcion: formData.fotos_recepcion || [],
     };
 
-    await onAddOrder(orderData);
-    navigate('/dashboard');
+    const result = await onAddOrder(orderData);
+    if (result) {
+      navigate('/dashboard');
+    } else {
+      alert('Error al crear la orden. Verifica que el servidor esté corriendo.');
+    }
   };
 
   return (

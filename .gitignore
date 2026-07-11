@@ -25,3 +25,10 @@ dist-ssr
 
 # Backend
 backend/node_modules
+
+# Uploaded photos
+backend/uploads/*.jpg
+backend/uploads/*.jpeg
+backend/uploads/*.png
+backend/uploads/*.gif
+backend/uploads/*.webp

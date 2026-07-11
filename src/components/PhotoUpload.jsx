@@ -1,6 +1,14 @@
 import { useRef } from 'react';
 import './PhotoUpload.css';
 
+const API_HOST = 'http://localhost:4000';
+
+const getPhotoSrc = (photo) => {
+  if (photo.startsWith('data:')) return photo; // base64 preview
+  if (photo.startsWith('/uploads/')) return `${API_HOST}${photo}`;
+  return photo;
+};
+
 function PhotoUpload({ photos = [], onPhotosChange, maxPhotos = 3, disabled = false, label = "Fotos" }) {
   const inputRef = useRef(null);
 
@@ -35,7 +43,7 @@ function PhotoUpload({ photos = [], onPhotosChange, maxPhotos = 3, disabled = fa
       <div className="photo-upload-grid">
         {photos.map((photo, index) => (
           <div key={index} className="photo-upload-item">
-            <img src={photo} alt={`Foto ${index + 1}`} className="photo-upload-img" />
+            <img src={getPhotoSrc(photo)} alt={`Foto ${index + 1}`} className="photo-upload-img" />
             {!disabled && (
               <button type="button" className="photo-upload-remove" onClick={() => removePhoto(index)}>✕</button>
             )}

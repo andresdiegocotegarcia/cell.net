@@ -17,6 +17,33 @@ import './App.css';
 
 const API_URL = 'http://localhost:4000/api';
 
+// Helper to upload base64 photos as files to the server
+const uploadPhotos = async (base64Photos) => {
+  // Filter out already-uploaded photos (they start with /uploads/ or http)
+  const newPhotos = base64Photos.filter(p => p.startsWith('data:'));
+  const existingPhotos = base64Photos.filter(p => !p.startsWith('data:'));
+
+  if (newPhotos.length === 0) {
+    return base64Photos; // nothing new to upload
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/upload`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ images: newPhotos }),
+    });
+
+    if (!res.ok) throw new Error('Error uploading');
+
+    const { paths } = await res.json();
+    return [...existingPhotos, ...paths];
+  } catch (err) {
+    console.error('Error subiendo fotos:', err);
+    return base64Photos; // fallback to base64 if upload fails
+  }
+};
+
 function AppContent() {
   const navigate = useNavigate();
 
@@ -110,6 +137,18 @@ function AppContent() {
   // Funciones de gestión de datos
   const addOrder = async (orderData) => {
     try {
+      // Upload photos first, if upload fails, create order without photos
+      if (orderData.fotos_recepcion && orderData.fotos_recepcion.length > 0) {
+        try {
+          orderData.fotos_recepcion = await uploadPhotos(orderData.fotos_recepcion);
+        } catch (e) {
+          console.warn('No se pudieron subir las fotos, creando orden sin fotos');
+          orderData.fotos_recepcion = [];
+        }
+      } else {
+        orderData.fotos_recepcion = [];
+      }
+
       const res = await fetch(`${API_URL}/ordenes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -129,6 +168,14 @@ function AppContent() {
 
   const updateOrder = async (id, updates) => {
     try {
+      // Upload any new photos
+      if (updates.fotos_recepcion && updates.fotos_recepcion.length > 0) {
+        updates.fotos_recepcion = await uploadPhotos(updates.fotos_recepcion);
+      }
+      if (updates.fotos_entrega && updates.fotos_entrega.length > 0) {
+        updates.fotos_entrega = await uploadPhotos(updates.fotos_entrega);
+      }
+
       const res = await fetch(`${API_URL}/ordenes/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
